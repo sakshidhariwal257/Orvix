@@ -1,0 +1,203 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html, body, #root {
+  height: 100%;
+}
+
+body {
+  @apply bg-bg text-text antialiased m-0;
+}
+
+a {
+  color: inherit;
+}
+
+button {
+  font-family: inherit;
+}
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.1);
+  border-radius: 8px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+
+@layer components {
+  .card {
+    @apply bg-card border border-border rounded-lg;
+  }
+
+  .btn {
+    @apply inline-flex items-center justify-center gap-2 px-4 py-2.5 rounded-[10px] border border-border
+           bg-surface text-text text-[13.5px] font-medium cursor-pointer whitespace-nowrap
+           transition-colors hover:bg-surface-hover disabled:opacity-60 disabled:cursor-not-allowed;
+  }
+
+  .btn-primary {
+    @apply btn border-none bg-accent-gradient text-white shadow-[0_8px_24px_rgba(124,92,255,0.3)] hover:brightness-105;
+  }
+
+  .btn-danger {
+    @apply btn border-red-500/35 text-red-300 bg-red-500/10 hover:bg-red-500/15;
+  }
+
+  .input {
+    @apply w-full px-3 py-2.5 rounded-[10px] border border-border bg-white/[0.03] text-text text-[13.5px]
+           outline-none transition-colors placeholder:text-text-faint focus:border-accent-2;
+  }
+
+  .field {
+    @apply flex flex-col gap-1.5 mb-3.5;
+  }
+
+  .field label {
+    @apply text-[12px] font-semibold text-text-dim;
+  }
+
+  .badge {
+    @apply inline-flex items-center gap-1.5 px-2.5 py-1 rounded-full text-[11.5px] font-semibold whitespace-nowrap;
+  }
+
+  .badge-Todo { @apply bg-slate-400/15 text-slate-300; }
+  .badge-InProgress { @apply bg-blue-500/15 text-blue-300; }
+  .badge-Review { @apply bg-amber-500/15 text-amber-300; }
+  .badge-Done { @apply bg-green-500/15 text-green-300; }
+
+  .badge-Low { @apply bg-green-500/15 text-green-300; }
+  .badge-Medium { @apply bg-amber-500/15 text-amber-300; }
+  .badge-High { @apply bg-red-500/15 text-red-300; }
+
+  .badge-Planning { @apply bg-slate-400/15 text-slate-300; }
+  .badge-Active { @apply bg-blue-500/15 text-blue-300; }
+  .badge-OnHold { @apply bg-amber-500/15 text-amber-300; }
+  .badge-Completed { @apply bg-green-500/15 text-green-300; }
+  .badge-Archived { @apply bg-white/10 text-text-faint; }
+
+  .badge-Owner { @apply bg-purple-500/15 text-purple-300; }
+  .badge-Admin { @apply bg-blue-500/15 text-blue-300; }
+  .badge-Manager { @apply bg-cyan-500/15 text-cyan-300; }
+  .badge-Member { @apply bg-white/10 text-text-dim; }
+  .badge-Guest { @apply bg-white/5 text-text-faint; }
+
+  .avatar-initials {
+    @apply inline-flex items-center justify-center rounded-full bg-accent-gradient text-white font-semibold flex-shrink-0;
+  }
+
+  .empty-state {
+    @apply flex flex-col items-center justify-center text-center px-5 py-10 text-text-dim gap-1.5;
+  }
+
+  .empty-state-title {
+    @apply text-text font-semibold text-sm;
+  }
+
+  .empty-state-sub {
+    @apply text-[13px] max-w-[380px];
+  }
+
+  .loader {
+    @apply flex items-center justify-center p-10 text-text-dim text-[13.5px];
+  }
+
+  .error-banner {
+    @apply px-3.5 py-2.5 rounded-[10px] bg-red-500/10 border border-red-500/35 text-red-300 text-[13.5px] mb-4;
+  }
+
+  .full-page-loader {
+    @apply h-screen flex items-center justify-center text-text-dim bg-bg;
+  }
+
+  .modal-overlay {
+    @apply fixed inset-0 bg-black/70 flex items-center justify-center z-[100] p-5;
+  }
+
+  .modal {
+    @apply w-full max-w-[480px] max-h-[88vh] overflow-y-auto bg-[#0d1120] border border-border-strong rounded-lg p-6;
+  }
+
+  .modal-header {
+    @apply flex items-center justify-between mb-4;
+  }
+
+  .modal-header h2 {
+    @apply m-0 text-lg;
+  }
+
+  .modal-close {
+    @apply bg-transparent border-none text-text-dim cursor-pointer p-1 hover:text-text;
+  }
+
+  .modal-actions {
+    @apply flex justify-end gap-2.5 mt-2;
+  }
+}
+
+/* ---------- Landing page motion ---------- */
+
+@keyframes fade-up {
+  from { opacity: 0; transform: translateY(18px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+.animate-fade-up {
+  animation: fade-up 0.75s cubic-bezier(0.16, 1, 0.3, 1) both;
+}
+
+@keyframes float-y {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-16px); }
+}
+.animate-float {
+  animation: float-y 6s ease-in-out infinite;
+}
+
+@keyframes marquee-left {
+  from { transform: translateX(0); }
+  to { transform: translateX(-50%); }
+}
+@keyframes marquee-right {
+  from { transform: translateX(-50%); }
+  to { transform: translateX(0); }
+}
+.animate-marquee-left {
+  animation: marquee-left 32s linear infinite;
+}
+.animate-marquee-right {
+  animation: marquee-right 32s linear infinite;
+}
+.marquee-row:hover .animate-marquee-left,
+.marquee-row:hover .animate-marquee-right {
+  animation-play-state: paused;
+}
+
+/* Scroll-reveal: toggled by the <Reveal> wrapper component via IntersectionObserver */
+.reveal {
+  opacity: 0;
+  transform: translateY(24px);
+  transition: opacity 0.7s cubic-bezier(0.16, 1, 0.3, 1), transform 0.7s cubic-bezier(0.16, 1, 0.3, 1);
+}
+.reveal.in-view {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-fade-up,
+  .animate-float,
+  .animate-marquee-left,
+  .animate-marquee-right {
+    animation: none;
+  }
+  .reveal {
+    opacity: 1;
+    transform: none;
+    transition: none;
+  }
+}
